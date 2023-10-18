@@ -1,12 +1,16 @@
 package com.example.hirajheelfoodmenu.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
+
+import java.util.List;
 
 @Data
 @Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Items {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,6 +19,9 @@ public class Items {
     private double price;
     @OneToOne
     private Image image;
+    @OneToOne
+    private Image images;
     @ManyToOne
+    @JoinColumn(name = "categories_id")
     private Categories categories;
 }

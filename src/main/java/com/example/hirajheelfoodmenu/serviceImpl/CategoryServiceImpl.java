@@ -1,7 +1,9 @@
 package com.example.hirajheelfoodmenu.serviceImpl;
 
 import com.example.hirajheelfoodmenu.model.Categories;
+import com.example.hirajheelfoodmenu.model.Image;
 import com.example.hirajheelfoodmenu.repository.CategoryRepo;
+import com.example.hirajheelfoodmenu.repository.ImageRepository;
 import com.example.hirajheelfoodmenu.response.CommonResponse;
 import com.example.hirajheelfoodmenu.response.FailedResponse;
 import com.example.hirajheelfoodmenu.service.CategoryService;
@@ -19,10 +21,12 @@ import java.util.Optional;
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepo categoryRepo;
     private final ObjectMapper objectMapper;
+    private final ImageRepository imageRepository;
 
-    public CategoryServiceImpl(CategoryRepo categoryRepo, ObjectMapper objectMapper) {
+    public CategoryServiceImpl(CategoryRepo categoryRepo, ObjectMapper objectMapper, ImageRepository imageRepository) {
         this.categoryRepo = categoryRepo;
         this.objectMapper = objectMapper;
+        this.imageRepository = imageRepository;
     }
 
     @Override
@@ -48,6 +52,10 @@ public class CategoryServiceImpl implements CategoryService {
             if (categories == null){
                 log.info("CATEGORY CAN NOT BE NULL");
                 return FailedResponse.makeFailedResponseBody();
+            }
+            if (categories.getImage().getImage() == null || categories.getImage().getImagetype() == null ){
+                Optional<Image> image = imageRepository.findById(categories.getImage().getId());
+                image.ifPresent(categories::setImage);
             }
             Categories savedCategory = categoryRepo.save(categories);
             return CommonResponse.builder()

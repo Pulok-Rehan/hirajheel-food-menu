@@ -6,5 +6,5 @@ public enum CategoryEnum {
     DINNER,
     JUICES,
     SNACKS,
-    IFTAR
+    SWEETS
 }

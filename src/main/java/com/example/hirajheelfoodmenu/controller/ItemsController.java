@@ -16,10 +16,10 @@ public class ItemsController {
         this.itemsService = itemsService;
     }
     @GetMapping(path = "/items")
-    public CommonResponse getAllItems(){
+    public CommonResponse getAllItems(@RequestParam long categoryId){
         log.info("ENTERED CONTROLLER FOR GETTING ALL ITEMS...");
         try {
-            return itemsService.getAllItems();
+            return itemsService.getAllItems(categoryId);
         }
         catch (Exception e){
             e.printStackTrace();

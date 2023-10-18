@@ -19,4 +19,8 @@ public class Image {
     @Lob
     @Column( length = 100000 )
     private byte[] image;
+    @ManyToOne
+    @JoinColumn(name = "categories_id")
+    private Categories categories;
+
 }
