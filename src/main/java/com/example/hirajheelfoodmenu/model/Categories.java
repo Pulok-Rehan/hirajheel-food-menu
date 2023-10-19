@@ -20,8 +20,7 @@ public class Categories {
     private long id;
     @Enumerated(value = EnumType.STRING)
     private CategoryEnum name;
-    @OneToMany
-    @JoinColumn(name = "image_id")
-    private Image image;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Image> images;
 
 }

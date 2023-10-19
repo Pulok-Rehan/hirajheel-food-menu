@@ -8,5 +8,5 @@ public interface ItemsService {
     CommonResponse getAllItems(long categoryId) throws JsonProcessingException;
     CommonResponse getItem(long itemId) throws JsonProcessingException;
     CommonResponse deleteItem(long itemId);
-    CommonResponse addItem(Items items);
+    CommonResponse addItem(Items items) throws JsonProcessingException;
 }

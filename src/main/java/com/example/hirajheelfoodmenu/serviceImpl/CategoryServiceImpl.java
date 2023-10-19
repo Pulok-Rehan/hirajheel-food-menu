@@ -13,6 +13,7 @@ import io.micrometer.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,15 +49,21 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CommonResponse addCategory(Categories categories) throws JsonProcessingException {
+//        List<Image> images = new ArrayList<>();
+//        List<Long> idList = new ArrayList<>();
         try {
             if (categories == null){
                 log.info("CATEGORY CAN NOT BE NULL");
                 return FailedResponse.makeFailedResponseBody();
             }
-            if (categories.getImage().getImage() == null || categories.getImage().getImagetype() == null ){
-                Optional<Image> image = imageRepository.findById(categories.getImage().getId());
-                image.ifPresent(categories::setImage);
-            }
+//            if (categories.getImages().size() == 0){
+//                Optional<Image> image = imageRepository.findAllById()ById();
+//                if(image.isPresent()){
+//                    for(Image image1 : image.stream().toList()){
+//                        images.add(image1);
+//                    }
+//                }
+//            }
             Categories savedCategory = categoryRepo.save(categories);
             return CommonResponse.builder()
                     .hasError(false)
